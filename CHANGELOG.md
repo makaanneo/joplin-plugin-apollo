@@ -1,3 +1,10 @@
+# 1.0.0 (2022-01-13)
+
+
+### Features
+
+* First version of plugin ([6f61441](https://github.com/makaanneo/joplin-plugin-apollo/commit/6f61441284da7138c52f88460c2a281865513b64))
+
 # 1.0.0 (2022-01-12)
 
 
