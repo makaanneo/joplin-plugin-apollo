@@ -1,5 +1,5 @@
 {
-  "name": "joplin-plugin-template",
+  "name": "joplin-plugin-apollo",
   "version": "1.0.0",
   "scripts": {
     "dist": "npm run plugin-build && npm run plugin-pack",
