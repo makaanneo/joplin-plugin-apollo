@@ -1,9 +1,5 @@
 import joplin from 'api';
-import {
-  MenuItemLocation,
-  SettingItemType,
-  ToolbarButtonLocation
-} from 'api/types';
+import { ToolbarButtonLocation } from 'api/types';
 
 joplin.plugins.register({
   onStart: async function () {
@@ -19,8 +15,37 @@ joplin.plugins.register({
         try {
           noteAttachments = await joplin.data.get(
             ['notes', selectedNote.id, 'resources'],
-            { fields: ['id', 'title',  'file_extension', 'filename']}
+            { fields: ['id', 'title', 'file_extension', 'filename'] }
           );
+          if (
+            noteAttachments !== null &&
+            noteAttachments.items !== null &&
+            noteAttachments.items.length > 0
+          ) {
+            const firstResource = noteAttachments.items[0];
+            const newResourceFileName = `${selectedNote.title}.${firstResource.file_extension}`;
+            const resource = await joplin.data.put(
+              ['resources', firstResource.id],
+              null,
+              {
+                title: newResourceFileName,
+                fileName: newResourceFileName
+              }
+            );
+            const replacedBody = selectedNote.body.replace(
+              firstResource.title,
+              resource.title
+            );
+            const changedNote = await joplin.data.put(
+              ['notes', selectedNote.id],
+              null,
+              {
+                body: replacedBody
+              }
+            );
+            console.log(changedNote);
+            console.log(resource);
+          }
           console.log(noteAttachments.items);
         } catch (e) {
           console.error('note resource retrieval error');
