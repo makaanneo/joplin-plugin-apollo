@@ -2,7 +2,7 @@
   "name": "joplin-plugin-template",
   "version": "1.0.0",
   "scripts": {
-    "dist": "npm run plugin-build && npm run plugin-extrascripts && npm run plugin-pack",
+    "dist": "npm run plugin-build && npm run plugin-pack",
     "plugin-build": "webpack --config-name pluginConfig",
     "plugin-extrascripts": "webpack --config-name attachContentScripts",
     "plugin-pack": "webpack --config-name createArchiveConfig",
@@ -14,7 +14,9 @@
     "bump-plugin-version": "node bump-plugin-version.js"
   },
   "license": "MIT",
-  "keywords": [],
+  "keywords": [
+    "joplin-plugin"
+  ],
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
