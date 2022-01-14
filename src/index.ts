@@ -1,5 +1,6 @@
 import joplin from 'api';
 import { ToolbarButtonLocation } from 'api/types';
+import * as path from 'path';
 
 joplin.plugins.register({
   onStart: async function () {
@@ -33,8 +34,8 @@ joplin.plugins.register({
               }
             );
             const replacedBody = selectedNote.body.replace(
-              firstResource.title,
-              resource.title
+              path.basename(firstResource.title, firstResource.file_extension),
+              path.basename(resource.title, resource.file_extension)
             );
             const changedNote = await joplin.data.put(
               ['notes', selectedNote.id],
