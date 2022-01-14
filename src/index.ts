@@ -1,6 +1,5 @@
 import joplin from 'api';
 import { ToolbarButtonLocation } from 'api/types';
-import * as path from 'path';
 import { renamerHelper } from './renamer';
 
 joplin.plugins.register({
