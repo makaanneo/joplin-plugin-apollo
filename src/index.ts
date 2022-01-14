@@ -1,6 +1,7 @@
 import joplin from 'api';
 import { ToolbarButtonLocation } from 'api/types';
 import * as path from 'path';
+import { renamerHelper } from './renamer';
 
 joplin.plugins.register({
   onStart: async function () {
@@ -33,9 +34,10 @@ joplin.plugins.register({
                 fileName: newResourceFileName
               }
             );
-            const replacedBody = selectedNote.body.replace(
-              path.basename(firstResource.title, firstResource.file_extension),
-              path.basename(resource.title, resource.file_extension)
+            const rn = new renamerHelper();
+            const replacedBody = await rn.replaceFileNameInNote(
+              resource.title, firstResource.title,
+              selectedNote.body
             );
             const changedNote = await joplin.data.put(
               ['notes', selectedNote.id],
