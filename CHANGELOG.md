@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.0...v1.0.1) (2022-01-14)
+
+
+### Bug Fixes
+
+* incorect identification of the target for replacement of attachment name. ([beb4138](https://github.com/makaanneo/joplin-plugin-apollo/commit/beb4138d2d2bee3429040f36b4bad4913ad1ea96))
+
 # 1.0.0 (2022-01-13)
 
 
