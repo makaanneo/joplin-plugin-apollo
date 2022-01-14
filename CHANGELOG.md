@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.1...v1.0.2) (2022-01-14)
+
+
+### Bug Fixes
+
+* rename now uses regex to detect file name to replace ([ddfb3ce](https://github.com/makaanneo/joplin-plugin-apollo/commit/ddfb3ce6c72059bc47bdc417648f393731e17d77))
+
 ## [1.0.1](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.0...v1.0.1) (2022-01-14)
 
 
