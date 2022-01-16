@@ -1,3 +1,11 @@
+## [1.0.3](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.2...v1.0.3) (2022-01-16)
+
+
+### Bug Fixes
+
+* **security dependency:** bump versions ([a2b74c8](https://github.com/makaanneo/joplin-plugin-apollo/commit/a2b74c8e41184639db183dd0201731bd0c96f853))
+* version ([1d9f857](https://github.com/makaanneo/joplin-plugin-apollo/commit/1d9f8570a86f188da019ef684a0826b7549e459c))
+
 ## [1.0.2](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.1...v1.0.2) (2022-01-14)
 
 
