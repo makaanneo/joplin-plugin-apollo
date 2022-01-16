@@ -2,6 +2,8 @@
 
 You can use these plugin to rename the first attached resource to a note. The resource will be renamed after the title of the note.
 
+## Development
+
 - automatic NPM release
 - Update all relevant Version files
 - commit all relevant Version files
