@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.3...v1.1.0) (2022-01-18)
+
+
+### Features
+
+* Add confirmation dialog on rename first resource ([f1c1c02](https://github.com/makaanneo/joplin-plugin-apollo/commit/f1c1c022c0cfbac5bdd26b6132d76837fe4c5515))
+
 ## [1.0.3](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.2...v1.0.3) (2022-01-16)
 
 
