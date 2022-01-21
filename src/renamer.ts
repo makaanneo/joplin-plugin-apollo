@@ -14,7 +14,7 @@ class renamerHelper {
 
   public async replaceFileNameInNote(resourceFileName: string, oldFileName: string, noteBody:string): Promise<string> {
     await this.initialize();
-    const re = new RegExp(`${oldFileName}`, 'gi');
+    const re = new RegExp(`(${oldFileName}(.[A-Za-z]){0,3})`, 'gmi');
     const replacedBody = noteBody.replace(
       re,
       resourceFileName
