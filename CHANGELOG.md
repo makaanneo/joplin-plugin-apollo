@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.1.0...v1.1.1) (2022-01-21)
+
+
+### Bug Fixes
+
+* **missing extension:** link titles with extension and missing now will be replaced corrctly ([2805961](https://github.com/makaanneo/joplin-plugin-apollo/commit/28059611b95429fff5c8a3cb77a013942e05a2d5))
+
 # [1.1.0](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.0.3...v1.1.0) (2022-01-18)
 
 
