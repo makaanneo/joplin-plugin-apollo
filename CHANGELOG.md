@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.1.1...v1.2.0) (2022-01-29)
+
+
+### Features
+
+* **security:** bump versions ([995c85c](https://github.com/makaanneo/joplin-plugin-apollo/commit/995c85c0f8fb65efb86e4cad6311352b2ba64752))
+
 ## [1.1.1](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.1.0...v1.1.1) (2022-01-21)
 
 
