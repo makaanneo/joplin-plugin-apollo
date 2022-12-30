@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.2.0...v1.2.1) (2022-12-30)
+
+
+### Bug Fixes
+
+* **update:** new versions and set default node to 18 ([9cb7eb9](https://github.com/makaanneo/joplin-plugin-apollo/commit/9cb7eb9110a1a6fd73fe6d7aa934c77b539309af))
+
 # [1.2.0](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.1.1...v1.2.0) (2022-01-29)
 
 
