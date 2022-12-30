@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 // -----------------------------------------------------------------------------
 // This file is used to build the plugin file (.jpl) and plugin info (.json). It
 // is recommended not to edit this file as it would be overwritten when updating
@@ -22,7 +23,6 @@ const userConfigPath = path.resolve(rootDir, userConfigFilename);
 const distDir = path.resolve(rootDir, 'dist');
 const srcDir = path.resolve(rootDir, 'src');
 const publishDir = path.resolve(rootDir, 'publish');
-
 const userConfig = Object.assign(
   {},
   {
@@ -105,9 +105,10 @@ function readManifest(manifestPath) {
 }
 
 function createPluginArchive(sourceDir, destPath) {
+  const cleanSource = sourceDir.replaceAll('\\', '/');
   const distFiles = glob
-    .sync(`${sourceDir}/**/*`, { nodir: true })
-    .map((f) => f.substr(sourceDir.length + 1));
+    .sync(`${cleanSource}/**/*`, { nodir: true })
+    .map((f) => f.substr(cleanSource.length + 1));
 
   if (!distFiles.length)
     throw new Error(
@@ -120,6 +121,7 @@ function createPluginArchive(sourceDir, destPath) {
       strict: true,
       portable: true,
       file: destPath,
+      filter: (path) => tarFilter(path),
       cwd: sourceDir,
       sync: true
     },
@@ -127,6 +129,21 @@ function createPluginArchive(sourceDir, destPath) {
   );
 
   console.info(chalk.cyan(`Plugin archive has been created in ${destPath}`));
+}
+
+const ignoreFilesForPluginArchive = [
+  'bump-plugin-version.d.ts',
+  'emptyContentScript.d.ts',
+  'jest.config.d.ts',
+  'webpack.config.d.ts'
+];
+
+function tarFilter(path) {
+  if (ignoreFilesForPluginArchive.includes(path)) {
+    console.warn(`Path ${path} will be ignored!`);
+    return false;
+  }
+  return true;
 }
 
 function createPluginInfo(manifestPath, destPath, jplFilePath) {
@@ -193,7 +210,9 @@ function onBuildCompleted() {
   try {
     fs.removeSync(path.resolve(publishDir, 'index.js'));
     fs.removeSync(path.resolve(distDir, '__tests__'));
+    fs.removeSync(path.resolve(distDir, 'coverage'));
     fs.removeSync(path.resolve(publishDir, '__tests__'));
+    fs.removeSync(path.resolve(publishDir, 'coverage'));
     createPluginArchive(distDir, pluginArchiveFilePath);
     createPluginInfo(manifestPath, pluginInfoFilePath, pluginArchiveFilePath);
     validatePackageJson();
@@ -259,7 +278,8 @@ const pluginConfig = Object.assign({}, baseConfig, {
               // already copied into /dist so we don't copy them.
               '**/*.ts',
               '**/*.tsx',
-              '**/__tests__/*'
+              '**/__tests__/*',
+              '**/coverage/*'
             ]
           }
         }
@@ -270,6 +290,26 @@ const pluginConfig = Object.assign({}, baseConfig, {
 
 const extraScriptConfig = Object.assign({}, baseConfig, {
   name: 'attachContentScripts',
+  resolve: {
+    alias: {
+      api: path.resolve(__dirname, 'api')
+    },
+    extensions: ['.tsx', '.ts', '.js', '.json']
+  }
+});
+
+const emptyContentScript = Object.assign({}, baseConfig, {
+  name: 'attachContentScripts',
+  entry: './emptyContentScript.ts',
+  module: {
+    rules: [
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
+      }
+    ]
+  },
   resolve: {
     alias: {
       api: path.resolve(__dirname, 'api')
@@ -315,21 +355,25 @@ const createArchiveConfig = {
   ]
 };
 
-function resolveExtraScriptPath(name) {
-  const relativePath = `./src/${name}`;
+function buildWebpackConfiguration(extraScripts) {
+  const entriesForEntry = {};
+  for (const name of extraScripts) {
+    const relativePath = `./src/${name}`;
 
-  const fullPath = path.resolve(`${rootDir}/${relativePath}`);
-  if (!fs.pathExistsSync(fullPath))
-    throw new Error(`Could not find extra script: "${name}" at "${fullPath}"`);
+    const fullPath = path.resolve(`${rootDir}/${relativePath}`);
+    if (!fs.pathExistsSync(fullPath))
+      throw new Error(
+        `Could not find extra script: "${name}" at "${fullPath}"`
+      );
 
-  const s = name.split('.');
-  s.pop();
-  const nameNoExt = s.join('.');
-
+    const s = name.split('.');
+    s.pop();
+    const nameNoExt = s.join('.');
+    entriesForEntry[nameNoExt] = relativePath;
+  }
   return {
-    entry: relativePath,
+    entry: entriesForEntry,
     output: {
-      filename: `${nameNoExt}.js`,
       path: distDir,
       library: 'default',
       libraryTarget: 'commonjs',
@@ -339,19 +383,18 @@ function resolveExtraScriptPath(name) {
 }
 
 function buildExtraScriptConfigs(userConfig) {
-  if (!userConfig.extraScripts.length) return [];
+  if (!userConfig.extraScripts.length) return [emptyContentScript];
 
   const output = [];
   console.log('Add extra script and config.');
-  for (const scriptName of userConfig.extraScripts) {
-    const scriptPaths = resolveExtraScriptPath(scriptName);
-    output.push(
-      Object.assign({}, extraScriptConfig, {
-        entry: scriptPaths.entry,
-        output: scriptPaths.output
-      })
-    );
-  }
+  const scriptPaths = buildWebpackConfiguration(userConfig.extraScripts);
+  output.push(
+    Object.assign({}, extraScriptConfig, {
+      entry: scriptPaths.entry,
+      output: scriptPaths.output
+    })
+  );
+
   return output;
 }
 
