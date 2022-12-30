@@ -1,3 +1,10 @@
+## [1.2.2](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.2.1...v1.2.2) (2022-12-30)
+
+
+### Bug Fixes
+
+* **metadata:** fix metadata ([b499557](https://github.com/makaanneo/joplin-plugin-apollo/commit/b4995573ae05cc2f52a2af97f3e0ee7c20e81070))
+
 ## [1.2.1](https://github.com/makaanneo/joplin-plugin-apollo/compare/v1.2.0...v1.2.1) (2022-12-30)
 
 

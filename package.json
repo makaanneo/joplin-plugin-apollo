@@ -1,6 +1,6 @@
 {
   "name": "joplin-plugin-apollo",
-  "version": "1.2.0",
+  "version": "1.2.2",
   "scripts": {
     "dist": "yarn run plugin-build && yarn run plugin-extrascripts && yarn run plugin-pack",
     "plugin-build": "webpack --config-name pluginConfig",
