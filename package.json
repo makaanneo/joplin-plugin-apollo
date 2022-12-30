@@ -1,6 +1,6 @@
 {
-  "name": "joplin-plugin-athena",
-  "version": "2.2.2",
+  "name": "joplin-plugin-apollo",
+  "version": "1.2.0",
   "scripts": {
     "dist": "yarn run plugin-build && yarn run plugin-extrascripts && yarn run plugin-pack",
     "plugin-build": "webpack --config-name pluginConfig",
@@ -27,9 +27,9 @@
     "email": "233635+makaanneo@users.noreply.github.com"
   },
   "bugs": {
-    "url": "https://github.com/makaanneo/joplin-plugin-athena/issues"
+    "url": "https://github.com/makaanneo/joplin-plugin-apollo/issues"
   },
-  "homepage": "https://github.com/makaanneo/joplin-plugin-athena",
+  "homepage": "https://github.com/makaanneo/joplin-plugin-apollo",
   "devDependencies": {
     "@semantic-release/changelog": "^6.0.2",
     "@semantic-release/commit-analyzer": "^9.0.2",
